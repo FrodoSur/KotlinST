@@ -14,6 +14,7 @@ import com.example.kotlinst.mvvm.model.Note
 import com.example.kotlinst.mvvm.viewmodel.MainViewModel
 import com.example.kotlinst.mvvm.viewmodel.MainViewState
 import com.example.kotlinst.ui.activity.dialogue.LogoutDialog
+import com.example.kotlinst.ui.adapter.NotesRVAdapter
 import com.firebase.ui.auth.AuthUI
 import com.kotlin.example.R
 import com.kotlin.example.mvvm.model.Note
@@ -23,6 +24,7 @@ import com.kotlin.example.ui.activity.NoteActivity
 import com.kotlin.example.ui.activity.dialogue.LogoutDialog
 import com.kotlin.example.ui.adapter.NotesRVAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
 
@@ -32,9 +34,7 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.Lo
         }
     }
 
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    override val viewModel: MainViewModel by viewModel()
 
     override val layoutRes: Int = com.example.kotlinst.R.layout.activity_main
     lateinit var adapter: NotesRVAdapter

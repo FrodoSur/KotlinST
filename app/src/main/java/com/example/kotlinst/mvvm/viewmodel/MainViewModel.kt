@@ -8,8 +8,8 @@ import com.example.kotlinst.mvvm.model.Note
 import com.example.kotlinst.mvvm.model.NoteResult
 import com.example.kotlinst.mvvm.model.NotesRepository
 
-class MainViewModel() : BaseViewModel<List<Note>?, MainViewState>() {
 
+class MainViewModel(notesRepository: NotesRepository) : BaseViewModel<List<Note>?, MainViewState>() {
     private val notesObserver = Observer<NoteResult> { result ->
         result ?: return@Observer
         when(result){
@@ -18,7 +18,7 @@ class MainViewModel() : BaseViewModel<List<Note>?, MainViewState>() {
         }
     }
 
-    private val repositoryNotes = NotesRepository.getNotes()
+    private val repositoryNotes = notesRepository.getNotes()
 
     init {
         viewStateLiveData.value = MainViewState()
